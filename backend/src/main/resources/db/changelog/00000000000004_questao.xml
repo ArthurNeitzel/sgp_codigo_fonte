@@ -3,42 +3,42 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="4" author="maxson.zucolotto">
+    <changeSet id="8" author="arthur.neitzel">
         <createTable tableName="QUESTAO" remarks="Tabela de questões">
-            <column name="ID" type="BIGINT" remarks="Campo de indentificação" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_QUESTAO"/>
-            </column>
-            <column name="DESCRICAO" type="varchar(400)" remarks="Descrição">
+            <column name="ID" type="NUMBER" remarks="Campo de indentificação">
                 <constraints nullable="false"/>
             </column>
-            <column name="ALTERNATIVA_1" type="varchar(400)">
+            <column name="DESCRICAO" type="VARCHAR(400)" remarks="Descrição">
                 <constraints nullable="false"/>
             </column>
-            <column name="ALTERNATIVA_2" type="varchar(400)">
+            <column name="ALTERNATIVA_1" type="VARCHAR(400)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ALTERNATIVA_3" type="varchar(400)">
+            <column name="ALTERNATIVA_2" type="VARCHAR(400)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ALTERNATIVA_4" type="varchar(400)">
+            <column name="ALTERNATIVA_3" type="VARCHAR(400)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ALTERNATIVA_5" type="varchar(400)">
+            <column name="ALTERNATIVA_4" type="VARCHAR(400)">
                 <constraints nullable="false"/>
             </column>
-            <column name="RESPOSTA" type="number">
+            <column name="ALTERNATIVA_5" type="VARCHAR(400)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ID_SENIORIDADE" type="number">
+            <column name="RESPOSTA" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
-            <column name="ID_TIPO_QUESTAO" type="number">
+            <column name="ID_SENIORIDADE" type="NUMBER" remarks="Armazena o id da senioridade.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_TIPO_QUESTAO" type="NUMBER" remarks="Armazena o id do tipo de questão.">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet id="5" author="maxson.zucolotto">
+    <changeSet id="9" author="maxson.zucolotto">
         <addForeignKeyConstraint baseColumnNames="ID_TIPO_QUESTAO"
                                  baseTableName="QUESTAO"
                                  constraintName="FK_QUESTAO_TIPO_QUESTAO"
@@ -46,11 +46,15 @@
                                  referencedTableName="TIPO_QUESTAO"/>
     </changeSet>
 
-    <changeSet id="6" author="maxson.zucolotto">
+    <changeSet id="10" author="maxson.zucolotto">
         <addForeignKeyConstraint baseColumnNames="ID_SENIORIDADE"
                                  baseTableName="QUESTAO"
                                  constraintName="FK_QUESTAO_SENIORIDADE"
                                  referencedColumnNames="ID"
                                  referencedTableName="SENIORIDADE"/>
+    </changeSet>
+
+    <changeSet id="10" author="arthur.neitzel">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" ordered="false" sequenceName="SEQ_QUESTAO" startValue="1"/>
     </changeSet>
 </databaseChangeLog>

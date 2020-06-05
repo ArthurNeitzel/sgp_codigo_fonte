@@ -3,16 +3,22 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="3" author="maxson.zucolotto">
+    <changeSet id="6" author="arthur.neitzel">
         <createTable tableName="SENIORIDADE" remarks="Tabela de níveis de senioridade">
-            <column name="ID" type="number" remarks="Campo de indentificação">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SENIORIDADE"/>
+            <column name="ID" type="NUMBER" remarks="Campo de indentificação">
+                <constraints nullable="false"/>
             </column>
-            <column name="DESCRICAO" type="varchar(80)" remarks="Descrição">
+            <column name="DESCRICAO" type="VARCHAR(80)" remarks="Descrição">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
 
+    <changeSet id="7" author="arthur.neitzel">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" ordered="false" sequenceName="SEQ_SENIORIDADE" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="8" author="arthur.neitzel">
         <insert tableName="SENIORIDADE">
             <column name="ID" value="1"/>
             <column name="DESCRICAO" value="ESTAGIÁRIO"/>
@@ -32,6 +38,5 @@
             <column name="ID" value="4"/>
             <column name="DESCRICAO" value="SÊNIOR"/>
         </insert>
-
     </changeSet>
 </databaseChangeLog>

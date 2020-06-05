@@ -3,26 +3,30 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="1" author="maxson.zucolotto">
-        <createTable tableName="USUARIO">
-            <column name="ID" type="BIGINT" remarks="Id do usuario" autoIncrement="true">
-                <constraints primaryKey="true" primaryKeyName="USUARIO_PK" nullable="false" />
-            </column>
-            <column name="NOME" type="varchar(200)" remarks="Nome do usuario">
+    <changeSet id="1" author="arthur.neitzel">
+        <createTable tableName="USUARIO" remarks="Tabela para armazenar usuarios">
+            <column name="ID" type="NUMBER" remarks="Chave primaria de usuario">
                 <constraints nullable="false" />
             </column>
-            <column name="CPF" type="varchar(11)" >
+            <column name="NOME" type="VARCHAR(200)" remarks="Nome do usuario">
                 <constraints nullable="false" />
             </column>
-            <column name="EMAIL" type="varchar(100)" >
+            <column name="CPF" type="VARCHAR(11)" >
                 <constraints nullable="false" />
             </column>
-            <column name="SENHA" type="varchar(20)" >
+            <column name="EMAIL" type="VARCHAR(100)" >
                 <constraints nullable="false" />
             </column>
-            <column name="ADMIN" type="number" >
+            <column name="SENHA" type="VARCHAR(20)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="ADMIN" type="DECIMAL(1,0)" remarks="Define se o usuário é um administrador ou não. [1] Admin, [0] Candidato" >
                 <constraints nullable="false" />
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="arthur.neitzel">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" ordered="false" sequenceName="SEQ_USUARIO" startValue="1"/>
     </changeSet>
 </databaseChangeLog>
