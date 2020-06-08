@@ -5,30 +5,42 @@ spring:
     application:
         name: sgpservice
     datasource:
-        url: jdbc:mysql://localhost:3306/sgp?createDatabaseIfNotExist=true&usrSSL=false
-        username: root
-        password: root
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:oracle:thin:@localhost:1521:xe
+        username: SGP
+        password: SGP
     jackson:
         date-format: yyyy-MM-dd
         deserialization:
             fail-on-unknown-properties: false
     jpa:
-        database: MYSQL
+        database-platform: org.hibernate.dialect.Oracle10gDialect
+        database: ORACLE
         show-sql: true
         open-in-view: false
         hibernate:
             ddl-auto: none
             naming:
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.MySQL5Dialect
+                implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
     liquibase:
         change-log: classpath:/db/master.xml
 #        drop-first: true
+        contexts: devommit
+
+testdocker:
+    oracle:
+        image: wnameless/oracle-xe-11g:latest
+
 server:
     port: 8080
 
-app:
-    TOKEN_ADMIN: 4dm1n
-    TOKEN_USER: us3r
+jhipster:
+    security:
+        authentication:
+            jwt:
+                secret: my-secret-token-to-change-in-production
+                # Token is valid 24 hours
+                token-validity-in-seconds: 86400
+                token-validity-in-seconds-for-remember-me: 2592000
+
